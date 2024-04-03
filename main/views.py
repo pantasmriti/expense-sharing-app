@@ -3,6 +3,11 @@ from main.models import ExpenseCategory
 from .forms import *
 from main.models import *
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
 
 @login_required
 def home(request):
@@ -168,3 +173,28 @@ def settlement_delete(request, settlement_id):
 def settlement_list(request):
     settlements = Settlement.objects.all()
     return render(request, 'settlement_list.html', {'settlements': settlements})
+
+
+from .forms import Invitation
+@login_required
+def invitation(request):
+    if request.method == 'POST':
+        form = Invitation(request.POST)  # Bind the form with POST data
+        if form.is_valid():
+            email = form.cleaned_data['email']  # Extract the email from form data
+
+            # Example of sending an email invitation
+            send_mail(
+                'Invitation to Expense Sharing App',
+                'You have been invited to join our Expense Sharing App!',
+                'pantasmriti2002@gmail.com',  # Sender's email address
+                [email],  # List of recipient email addresses
+                fail_silently=False,
+            )
+
+            # Redirect after sending the invitation
+            return HttpResponseRedirect(reverse('homepage'))
+    else:
+        form = Invitation()  # If not a POST request, create a new form instance
+
+    return render(request, 'invitation.html', {'form': form})

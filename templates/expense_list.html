@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense List</title>
-</head>
-<body>
-    <h1>Expense List</h1>
-    <ul>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold mb-6">Expense List</h1>
+    <ul class="divide-y divide-gray-200">
         {% for expense in expenses %}
-            <li>
-                Description: {{ expense.description }} <br>
-                Amount: {{ expense.amount }} <br>
-                Date: {{ expense.date }} <br>
-                {% comment %} <a href="{% url 'expense_detail' expense.id %}">View Details</a> <!-- Link to expense detail page --> {% endcomment %}
+            <li class="py-4">
+                <div class="flex space-x-4">
+                    <div class="flex-1">
+                        <p class="text-lg font-semibold text-gray-800">{{ expense.description }}</p>
+                        <p class="text-gray-600">Amount: {{ expense.amount }}</p>
+                        <p class="text-gray-600">Date: {{ expense.date }}</p>
+                    </div>
+                    <div>
+                        {% comment %} <a href="{% url 'expense_detail' expense.id %}" class="text-blue-500 hover:text-blue-700">View Details</a> <!-- Link to expense detail page --> {% endcomment %}
+                    </div>
+                </div>
             </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+</div>
+{% endblock %}

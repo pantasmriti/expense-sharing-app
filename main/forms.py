@@ -21,3 +21,6 @@ class SettlementForm(forms.ModelForm):
     class Meta:
         model = Settlement
         fields = ['expense_group', 'payer', 'payee', 'amount', 'settled']
+        
+class Invitation(forms.Form):
+    email = forms.EmailField(label='Email Address', max_length=100, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter email address'}))

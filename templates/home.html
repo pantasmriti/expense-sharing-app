@@ -1,38 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Sharing App</title>
-</head>
-<body>
-    <h1>Welcome {{ user.first_name }} {{ user.last_name }} to Expense Sharing App</h1>
-    
-    <a href="http://localhost:8000/expense/" style="font-size: 18px;">My Expenses</h2>
-    <ul>
-        {% for expense in expenses %}
-        <li>{{ expense.description }} - {{ expense.amount }}</li>
-        {% endfor %}
-    </ul>
-    
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Hero Section -->
+    <div class="bg-purple-900 text-white py-12 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-7xl font-bold mb-4">Welcome, {{ user.first_name }} {{ user.last_name }}!</h1>
+            <p class="text-lg">Manage your expenses and stay organized with the Expense Sharing App.</p>
+            <p class="text-lg mt-4">You're all settled up.<br> Awesome!</p>
+        </div>
+    </div>
 
-    
-    <h2>Expense Groups</h2>
-    <ul>
-        {% for expense_group in expense_groups %}
-        <li>{{ expense_group.group.name }} - {{ expense_group.expense.description }}</li>
-        {% endfor %}
-    </ul>
-    
-    <h2>Settlements</h2>
-    <ul>
-        {% for settlement in settlements %}
-        <li>Payer: {{ settlement.payer.first_name }} {{ settlement.payer.last_name }} - Payee: {{ settlement.payee.first_name }} {{ settlement.payee.last_name }} - Amount: {{ settlement.amount }}</li>
-        {% endfor %}
-    </ul>
+    {% comment %} <!-- Main Content -->
+    <div class="container mx-auto py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- My Expenses Section -->
+            <div class="bg-white rounded-lg p-6 shadow-md">
+                <h2 class="text-2xl font-semibold mb-4">My Expenses</h2>
+                <ul>
+                    {% for expense in expenses %}
+                        <li>{{ expense.description }} - {{ expense.amount }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
+            <!-- My Groups Section -->
+            <div class="bg-white rounded-lg p-6 shadow-md">
+                <h2 class="text-2xl font-semibold mb-4">My Groups</h2>
+                <ul>
+                    {% for group in groups %}
+                        <li>{{ group.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-    {% comment %} <button type="submit"></button> {% endcomment %}
-    
-</body>
-</html>
+            <!-- Expense Groups Section -->
+            <div class="bg-white rounded-lg p-6 shadow-md">
+                <h2 class="text-2xl font-semibold mb-4">Expense Groups</h2>
+                <ul>
+                    {% for expense_group in expense_groups %}
+                        <li>{{ expense_group.group.name }} - {{ expense_group.expense.description }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Settlements Section -->
+            <div class="bg-white rounded-lg p-6 shadow-md">
+                <h2 class="text-2xl font-semibold mb-4">Settlements</h2>
+                <ul>
+                    {% for settlement in settlements %}
+                        <li>Payer: {{ settlement.payer.first_name }} {{ settlement.payer.last_name }} - Payee: {{ settlement.payee.first_name }} {{ settlement.payee.last_name }} - Amount: {{ settlement.amount }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div> {% endcomment %}
+{% endblock %}
