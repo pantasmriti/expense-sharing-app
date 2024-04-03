@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense-Sharing-App - Home</title>
+    <!-- Add Tailwind CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 text-white p-4 flex justify-between">
+        <div>
+            <a href="/home" class="font-bold text-xl">Expense-Sharing-App</a>
+        </div>
+        <div class="flex space-x-4">
+            <a href="/category/list/" class="nav-link">My Expenses</a>
+            <a href="/group/create/" class="nav-link">My Groups</a>
+            <a href="/expensegroup/create/" class="nav-link">Expense Groups</a> <!-- Corrected URL -->
+            <a href="/settlement/create/" class="nav-link">Settlements</a>
+            <form action="/logout" method="post">
+                {% csrf_token %}
+                <button type="submit" class="nav-link">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+{% block content %}
+    
+{% endblock %}
+
+</body>
+</html>
